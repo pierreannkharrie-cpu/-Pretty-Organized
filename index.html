@@ -2,91 +2,320 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#c77dff">
-<title>Pierre's Pocket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9b5de5">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Pretty Organized</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#fff7ff;color:#30243a}
-.app{max-width:900px;margin:auto;min-height:100vh}.top{padding:28px 20px 18px;background:linear-gradient(135deg,#f3d8ff,#e8d7ff);border-radius:0 0 28px 28px}
-h1{margin:0;font-size:30px}.sub{margin:7px 0 0;color:#66536f}.tabs{display:flex;gap:8px;overflow:auto;padding:14px 12px;position:sticky;top:0;background:#fff7ff;z-index:2}.tab{border:0;border-radius:18px;padding:10px 14px;background:#eee3f5;color:#4d3a57;white-space:nowrap;font-weight:700}.tab.active{background:#c77dff;color:white}
-main{padding:8px 16px 40px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{background:white;border:1px solid #eadcf0;border-radius:20px;padding:18px;box-shadow:0 5px 18px #5d356d12}.card h2{margin:0 0 10px;font-size:18px}.big{font-size:30px;font-weight:800}.muted{color:#75657e}.bar{height:12px;background:#eee5f2;border-radius:20px;overflow:hidden}.fill{height:100%;background:#c77dff;width:0%}
-button.primary{border:0;background:#9d4edd;color:#fff;border-radius:14px;padding:11px 14px;font-weight:700;cursor:pointer}.row{display:flex;gap:8px;align-items:center}.row input,.card input,.card textarea{width:100%;padding:11px;border:1px solid #ddcde4;border-radius:12px;margin:6px 0 10px;font:inherit}.list{padding:0;list-style:none}.list li{padding:10px 0;border-bottom:1px solid #eee3f1;display:flex;justify-content:space-between;gap:10px}.pill{background:#f3e5ff;color:#7440a0;padding:5px 9px;border-radius:12px;font-size:12px;font-weight:700}
-.hidden{display:none}.empty{padding:30px;text-align:center;color:#786a80}
-footer{text-align:center;padding:15px;color:#8a7892;font-size:13px}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#faf7ff;
+  color:#30243a;
+}
+.app{max-width:900px;margin:auto;min-height:100vh}
+header{
+  padding:25px 18px;
+  background:linear-gradient(135deg,#9b5de5,#f15bb5);
+  color:white;
+  border-radius:0 0 24px 24px;
+}
+header h1{margin:0;font-size:30px}
+header p{margin:7px 0 0}
+nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:14px 12px;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+nav button{
+  border:0;
+  padding:10px 14px;
+  border-radius:20px;
+  background:#eee5ff;
+  cursor:pointer;
+  white-space:nowrap;
+}
+nav button.active{background:#9b5de5;color:white}
+main{padding:18px}
+.page{display:none}
+.page.active{display:block}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 4px 15px #00000012;
+  margin-bottom:14px;
+}
+.card h2{margin-top:0}
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin:6px 0;
+}
+button.primary{
+  border:0;
+  background:#9b5de5;
+  color:white;
+  padding:11px 15px;
+  border-radius:12px;
+  cursor:pointer;
+}
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  margin-top:8px;
+  background:#f7f1ff;
+  border-radius:10px;
+}
+.item button{
+  border:0;
+  background:#ff7aa2;
+  color:white;
+  border-radius:8px;
+  padding:6px 9px;
+}
+.big{font-size:28px;font-weight:bold}
+.muted{color:#777}
+footer{text-align:center;padding:20px;color:#888}
 </style>
 </head>
+
 <body>
 <div class="app">
-<header class="top"><h1>💜 Pierre's Pocket</h1><p class="sub">School • Band • Creativity • Goals</p></header>
-<nav class="tabs">
-<button class="tab active" data-page="home">🏠 Home</button>
-<button class="tab" data-page="school">📚 School</button>
-<button class="tab" data-page="band">🥁 Band</button>
-<button class="tab" data-page="create">🎨 Create</button>
-<button class="tab" data-page="goals">🎯 Goals</button>
+
+<header>
+  <h1>💜 Pretty Organized</h1>
+  <p>School • Goals • Fundraising • Life</p>
+</header>
+
+<nav>
+  <button class="tab active" data-page="home">🏠 Home</button>
+  <button class="tab" data-page="school">📚 School</button>
+  <button class="tab" data-page="band">🎺 Band</button>
+  <button class="tab" data-page="goals">🎯 Goals</button>
 </nav>
+
 <main>
-<section id="home" class="page">
-<div class="grid">
-<div class="card"><h2>✨ Welcome</h2><p>Keep your school life, projects, and goals in one place.</p></div>
-<div class="card"><h2>📚 Homework</h2><div class="big" id="hwCount">0</div><div class="muted">unfinished tasks</div></div>
-<div class="card"><h2>💰 Fundraiser</h2><div class="big">$<span id="raised">0</span></div><div class="muted">of $500 goal</div><div class="bar"><div class="fill" id="fundFill"></div></div></div>
-<div class="card"><h2>🌟 Quick goal</h2><p id="quickGoal">Add a goal in the Goals tab.</p></div>
-</div>
+
+<section id="home" class="page active">
+  <div class="grid">
+    <div class="card">
+      <h2>✨ Welcome!</h2>
+      <p>Keep your school life, activities, and goals organized in one place.</p>
+    </div>
+
+    <div class="card">
+      <h2>📚 Homework</h2>
+      <div class="big" id="homeworkCount">0</div>
+      <p class="muted">unfinished tasks</p>
+    </div>
+
+    <div class="card">
+      <h2>💰 Fundraiser</h2>
+      <div class="big">$<span id="raisedHome">0</span></div>
+      <p class="muted">toward your $500 goal</p>
+    </div>
+
+    <div class="card">
+      <h2>🌟 Quick Goal</h2>
+      <p id="quickGoal">Add a goal in the Goals tab.</p>
+    </div>
+  </div>
 </section>
 
-<section id="school" class="page hidden">
-<div class="card"><h2>📚 My School</h2><div class="row"><input id="hwInput" placeholder="Add homework..."><button class="primary" onclick="addHomework()">Add</button></div><ul class="list" id="hwList"></ul></div>
-<div class="card" style="margin-top:14px"><h2>🗓️ Class Schedule</h2><div id="schedule"></div></div>
+<section id="school" class="page">
+  <div class="card">
+    <h2>📚 My School</h2>
+    <input id="hwInput" placeholder="Add homework...">
+    <button class="primary" onclick="addHomework()">Add Homework</button>
+    <div id="homeworkList"></div>
+  </div>
+
+  <div class="card">
+    <h2>🗓️ Class Schedule</h2>
+    <input id="classInput" placeholder="Example: English - Period 1">
+    <button class="primary" onclick="addClass()">Add Class</button>
+    <div id="classList"></div>
+  </div>
 </section>
 
-<section id="band" class="page hidden">
-<div class="grid">
-<div class="card"><h2>🥁 Band Fundraiser</h2><p>Track your progress toward your goal.</p><div class="row"><input id="fundInput" type="number" min="0" placeholder="Amount raised"><button class="primary" onclick="setFundraiser()">Save</button></div><div class="bar"><div class="fill" id="fundFill2"></div></div><p><b>$<span id="raised2">0</span></b> / $500</p></div>
-<div class="card"><h2>📅 Practice</h2><p class="muted">Add practice details to keep your band schedule organized.</p><textarea id="practice" rows="4" placeholder="Practice dates, times, notes..."></textarea><button class="primary" onclick="savePractice()">Save notes</button></div>
-</div>
+<section id="band" class="page">
+  <div class="card">
+    <h2>🎺 Band Fundraiser</h2>
+    <p>Track your progress toward your fundraising goal.</p>
+    <input id="fundInput" type="number" placeholder="Amount raised">
+    <button class="primary" onclick="addFunds()">Add Money</button>
+    <p><strong>$<span id="raised">0</span></strong> raised of $500</p>
+  </div>
+
+  <div class="card">
+    <h2>🎵 Practice</h2>
+    <textarea id="practiceInput" placeholder="Add practice details..."></textarea>
+    <button class="primary" onclick="savePractice()">Save Practice</button>
+    <p id="practiceText" class="muted">No practice notes yet.</p>
+  </div>
 </section>
 
-<section id="create" class="page hidden">
-<div class="grid">
-<div class="card"><h2>🎨 Flyer Ideas</h2><p>Homecoming • Class officer • Band • Fundraiser</p><button class="primary" onclick="idea()">Give me an idea</button><p id="ideaOut" class="muted"></p></div>
-<div class="card"><h2>✨ Username Ideas</h2><button class="primary" onclick="username()">Generate</button><p id="userOut" class="muted"></p></div>
-</div>
+<section id="goals" class="page">
+  <div class="card">
+    <h2>🎯 My Goals</h2>
+    <input id="goalInput" placeholder="What is your goal?">
+    <button class="primary" onclick="addGoal()">Add Goal</button>
+    <div id="goalList"></div>
+  </div>
 </section>
 
-<section id="goals" class="page hidden">
-<div class="card"><h2>🎯 My Goals</h2><div class="row"><input id="goalInput" placeholder="Add a personal goal..."><button class="primary" onclick="addGoal()">Add</button></div><ul class="list" id="goalList"></ul></div>
-</section>
 </main>
-<footer>Made for Pierre 💜 Your data stays in this browser.</footer>
+
+<footer>
+  💜 Pretty Organized • Made for staying on track
+</footer>
+
 </div>
+
 <script>
-const $=id=>document.getElementById(id);
-let data=JSON.parse(localStorage.getItem("pocketData")||'{"homework":[],"goals":[],"fund":0,"practice":""}');
-const save=()=>localStorage.setItem("pocketData",JSON.stringify(data));
-function render(){
- $("hwCount").textContent=data.homework.filter(x=>!x.done).length;
- $("raised").textContent=data.fund;$("raised2").textContent=data.fund;
- let pct=Math.min(100,data.fund/500*100);$("fundFill").style.width=pct+"%";$("fundFill2").style.width=pct+"%";
- $("practice").value=data.practice||"";
- $("hwList").innerHTML=data.homework.length?data.homework.map((x,i)=>`<li><span style="${x.done?'text-decoration:line-through;opacity:.55':''}">${x.text}</span><span><button class="primary" onclick="toggleHW(${i})">${x.done?'Undo':'Done'}</button> <button onclick="deleteHW(${i})">✕</button></span></li>`).join(""):'<li class="empty">No homework yet.</li>';
- $("goalList").innerHTML=data.goals.length?data.goals.map((x,i)=>`<li><span>${x}</span><button onclick="deleteGoal(${i})">✕</button></li>`).join(""):'<li class="empty">No goals yet.</li>';
- $("quickGoal").textContent=data.goals[0]||"Add a goal in the Goals tab.";
- $("schedule").innerHTML=["1st Period","2nd Period","3rd Period","4th Period","5th Period","6th Period","7th Period"].map(x=>`<div class="list"><li><span>${x}</span><span class="pill">Tap to edit later</span></li></div>`).join("");
+let homework = JSON.parse(localStorage.getItem("homework") || "[]");
+let classes = JSON.parse(localStorage.getItem("classes") || "[]");
+let goals = JSON.parse(localStorage.getItem("goals") || "[]");
+let raised = Number(localStorage.getItem("raised") || 0);
+let practice = localStorage.getItem("practice") || "";
+
+document.querySelectorAll(".tab").forEach(button=>{
+  button.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById(button.dataset.page).classList.add("active");
+  };
+});
+
+function addHomework(){
+  const input=document.getElementById("hwInput");
+  if(!input.value.trim()) return;
+  homework.push(input.value.trim());
+  input.value="";
+  save();
+  render();
 }
-function addHomework(){let v=$("hwInput").value.trim();if(!v)return;data.homework.push({text:v,done:false});$("hwInput").value="";save();render()}
-function toggleHW(i){data.homework[i].done=!data.homework[i].done;save();render()}
-function deleteHW(i){data.homework.splice(i,1);save();render()}
-function addGoal(){let v=$("goalInput").value.trim();if(!v)return;data.goals.push(v);$("goalInput").value="";save();render()}
-function deleteGoal(i){data.goals.splice(i,1);save();render()}
-function setFundraiser(){let v=Math.max(0,Number($("fundInput").value)||0);data.fund=v;save();render()}
-function savePractice(){data.practice=$("practice").value;save()}
-const ideas=["Use a bold school-color headline with your name and a short slogan.","Make a photo-centered flyer with 3 reasons to vote for you.","Create a band fundraiser graphic with a clear goal and progress bar."];
-const users=["pocketprincess","purple.pierre","pierre.creates","schoolgirl.sparkle","pocket.of.pierre"];
-function idea(){$("ideaOut").textContent=ideas[Math.floor(Math.random()*ideas.length)]}
-function username(){$("userOut").textContent=users[Math.floor(Math.random()*users.length)]}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));$(b.dataset.page).classList.remove("hidden")});
+
+function removeHomework(i){
+  homework.splice(i,1);
+  save();
+  render();
+}
+
+function addClass(){
+  const input=document.getElementById("classInput");
+  if(!input.value.trim()) return;
+  classes.push(input.value.trim());
+  input.value="";
+  save();
+  render();
+}
+
+function removeClass(i){
+  classes.splice(i,1);
+  save();
+  render();
+}
+
+function addGoal(){
+  const input=document.getElementById("goalInput");
+  if(!input.value.trim()) return;
+  goals.push(input.value.trim());
+  input.value="";
+  save();
+  render();
+}
+
+function removeGoal(i){
+  goals.splice(i,1);
+  save();
+  render();
+}
+
+function addFunds(){
+  const input=document.getElementById("fundInput");
+  const amount=Number(input.value);
+  if(!amount) return;
+  raised+=amount;
+  input.value="";
+  save();
+  render();
+}
+
+function savePractice(){
+  practice=document.getElementById("practiceInput").value;
+  save();
+  render();
+}
+
+function save(){
+  localStorage.setItem("homework",JSON.stringify(homework));
+  localStorage.setItem("classes",JSON.stringify(classes));
+  localStorage.setItem("goals",JSON.stringify(goals));
+  localStorage.setItem("raised",raised);
+  localStorage.setItem("practice",practice);
+}
+
+function render(){
+  document.getElementById("homeworkCount").textContent=homework.length;
+  document.getElementById("raised").textContent=raised;
+  document.getElementById("raisedHome").textContent=raised;
+
+  document.getElementById("homeworkList").innerHTML=
+    homework.map((x,i)=>`
+      <div class="item">
+        <span>📌 ${x}</span>
+        <button onclick="removeHomework(${i})">Done</button>
+      </div>`).join("");
+
+  document.getElementById("classList").innerHTML=
+    classes.map((x,i)=>`
+      <div class="item">
+        <span>📖 ${x}</span>
+        <button onclick="removeClass(${i})">×</button>
+      </div>`).join("");
+
+  document.getElementById("goalList").innerHTML=
+    goals.map((x,i)=>`
+      <div class="item">
+        <span>🎯 ${x}</span>
+        <button onclick="removeGoal(${i})">Done</button>
+      </div>`).join("");
+
+  document.getElementById("quickGoal").textContent=
+    goals.length ? goals[0] : "Add a goal in the Goals tab.";
+
+  document.getElementById("practiceText").textContent=
+    practice || "No practice notes yet.";
+
+  document.getElementById("practiceInput").value=practice;
+}
+
 render();
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("./service-worker.js")
+    .catch(error=>console.log("Service worker:",error));
+}
 </script>
+
 </body>
 </html>
